@@ -29,6 +29,7 @@ type rssFeed struct {
 	Links          []rssLink `xml:"channel>link"`
 	Language       string    `xml:"channel>language"`
 	Description    string    `xml:"channel>description"`
+	Generator      string    `xml:"channel>generator"`
 	PubDate        string    `xml:"channel>pubDate"`
 	ManagingEditor string    `xml:"channel>managingEditor"`
 	Webmaster      string    `xml:"channel>webMaster"`
@@ -60,7 +61,7 @@ func (r *rssFeed) Transform(baseURL string) *model.Feed {
 
 	for _, item := range r.Items {
 		entry := item.Transform()
-		if entry.Author == "" {
+		if entry.Author == "" && r.Generator == "" {
 			entry.Author = r.feedAuthor()
 		}
 

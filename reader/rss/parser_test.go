@@ -275,6 +275,33 @@ func TestParseFeedURLWithAtomLink(t *testing.T) {
 	}
 }
 
+func TestParseFeedWithGenerator(t *testing.T) {
+	data := `<?xml version="1.0" encoding="utf-8"?>
+		<rss version="2.0">
+		<channel>
+			<title>Example</title>
+			<link>https://example.org/</link>
+			<generator>Rss Generator</generator>
+			<webMaster>webmaster@example.com</webMaster>
+			<item>
+				<title>Test</title>
+				<link>https://example.org/item</link>
+			</item>
+		</channel>
+		</rss>`
+
+	feed, err := Parse("https://example.org/", bytes.NewBufferString(data))
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	expected := ""
+	result := feed.Entries[0].Author
+	if result != expected {
+		t.Errorf("Incorrect entry generator, got %q instead of %q", result, expected)
+	}
+}
+
 func TestParseFeedWithWebmaster(t *testing.T) {
 	data := `<?xml version="1.0" encoding="utf-8"?>
 		<rss version="2.0">
