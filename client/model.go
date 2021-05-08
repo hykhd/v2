@@ -34,6 +34,7 @@ type User struct {
 	ShowReadingTime   bool       `json:"show_reading_time"`
 	EntrySwipe        bool       `json:"entry_swipe"`
 	LastLoginAt       *time.Time `json:"last_login_at"`
+	DisplayMode       string     `json:"display_mode"`
 }
 
 func (u User) String() string {
@@ -65,6 +66,7 @@ type UserModificationRequest struct {
 	KeyboardShortcuts *bool   `json:"keyboard_shortcuts"`
 	ShowReadingTime   *bool   `json:"show_reading_time"`
 	EntrySwipe        *bool   `json:"entry_swipe"`
+	DisplayMode       *string `json:"display_mode"`
 }
 
 // Users represents a list of users.
@@ -120,6 +122,7 @@ type Feed struct {
 	KeeplistRules               string    `json:"keeplist_rules"`
 	Crawler                     bool      `json:"crawler"`
 	UserAgent                   string    `json:"user_agent"`
+	Cookie                      string    `json:"cookie"`
 	Username                    string    `json:"username"`
 	Password                    string    `json:"password"`
 	Category                    *Category `json:"category,omitempty"`
@@ -130,6 +133,7 @@ type FeedCreationRequest struct {
 	FeedURL                     string `json:"feed_url"`
 	CategoryID                  int64  `json:"category_id"`
 	UserAgent                   string `json:"user_agent"`
+	Cookie                      string `json:"cookie"`
 	Username                    string `json:"username"`
 	Password                    string `json:"password"`
 	Crawler                     bool   `json:"crawler"`
@@ -154,6 +158,7 @@ type FeedModificationRequest struct {
 	KeeplistRules               *string `json:"keeplist_rules"`
 	Crawler                     *bool   `json:"crawler"`
 	UserAgent                   *string `json:"user_agent"`
+	Cookie                      *string `json:"cookie"`
 	Username                    *string `json:"username"`
 	Password                    *string `json:"password"`
 	CategoryID                  *int64  `json:"category_id"`
